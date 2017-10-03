@@ -8,7 +8,7 @@
 
 pkgbase=dbus
 pkgname=('dbus' 'dbus-docs')
-pkgver=1.10.22
+pkgver=1.10.24
 pkgrel=2
 pkgdesc="Freedesktop.org message bus system"
 url="https://wiki.freedesktop.org/Software/dbus"
@@ -23,13 +23,13 @@ makedepends=('xmlto' 'docbook-xsl' 'python' 'yelp-tools' 'doxygen' 'git'
 			'libxft' 'libxi' 'libxinerama' 'libxrandr' 'libxres' 'libxtst'
 			'libxv' 'libxvmc' 'libxxf86dga' 'libxxf86vm' 'libdmx' 'libpciaccess'
 			'libxkbfile' 'libxshmfence' 'autoconf-archive')
-_commit=2f8f4d619b16b134671521c2b4aea3a94fb47848 # tags/dbus-1.10.22^0
+_commit=430643da9da488a0b089868b9aada324f24a1710 # tags/dbus-1.10.24^0
 source=("git+https://anongit.freedesktop.org/git/dbus/dbus#commit=$_commit"
-        '30-dbus'
-        'dbus.sysusers')
+        'dbus.sysusers'
+        'dbus.tmpfiles')
 sha256sums=('SKIP'
-            'dc1ce6d38674bad7a48ad1911576f8bbb3819f1019126fb1ef7c3cfad16bb02a'
-            '1ce179ba3a92ad34941d8ac7f53d01d42cbc91d43ada1136492b78c10b5d693d')
+            '1ce179ba3a92ad34941d8ac7f53d01d42cbc91d43ada1136492b78c10b5d693d'
+            '965cef20cce35819e89c65f06a931a38bea2119b0ae9c259b5d7f9cfc3edd6d7')
 validpgpkeys=('6DD4217456569BA711566AC7F06E8FDE7B45DAAC') # Eric Vidal
 
 pkgver() {
@@ -72,8 +72,7 @@ check() {
 package_dbus(){
 	
   optdepends=('dbus-s6serv: dbus service for s6'
-			'dbus-s6rcserv: dbus service for s6-rc'
-			'dbus-runitserv: dbus service for runit')
+			'dbus-s6rcserv: dbus service for s6-rc')
 	provides=('libdbus')
 	conflicts=('libdbus')
 	replaces=('libdbus')
@@ -84,12 +83,14 @@ package_dbus(){
 
   rm -rf "${pkgdir}/var/run"
 
-  install -Dm755 ../30-dbus "$pkgdir/etc/X11/xinit/xinitrc.d/30-dbus.sh"
+  #install -Dm755 ../30-dbus "$pkgdir/etc/X11/xinit/xinitrc.d/30-dbus.sh"
   install -Dm644 COPYING "$pkgdir/usr/share/licenses/dbus/COPYING"
   
   # systemd-sysusers
   install -Dm644 "$srcdir/dbus.sysusers" "$pkgdir/usr/lib/sysusers.d/dbus.conf"
-
+  # systemd-tmpfiles
+  install -D -m644 "${srcdir}/dbus.tmpfiles" "${pkgdir}/usr/lib/tmpfiles.d/dbus.conf"
+  	
   # Split docs
   mv "$pkgdir/usr/share/doc" "$srcdir"	
 }
