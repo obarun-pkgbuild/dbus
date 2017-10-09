@@ -8,8 +8,8 @@
 
 pkgbase=dbus
 pkgname=('dbus' 'dbus-docs')
-pkgver=1.11.18
-pkgrel=1
+pkgver=1.10.24
+pkgrel=2
 pkgdesc="Freedesktop.org message bus system"
 url="https://wiki.freedesktop.org/Software/dbus"
 arch=(x86_64)
@@ -23,7 +23,7 @@ makedepends=('xmlto' 'docbook-xsl' 'python' 'yelp-tools' 'doxygen' 'git'
 			'libxft' 'libxi' 'libxinerama' 'libxrandr' 'libxres' 'libxtst'
 			'libxv' 'libxvmc' 'libxxf86dga' 'libxxf86vm' 'libdmx' 'libpciaccess'
 			'libxkbfile' 'libxshmfence' 'autoconf-archive')
-_commit=f45c994151ba9948ff205dd8f69dca812369b2dd # tags/dbus-1.11.18^0
+_commit=430643da9da488a0b089868b9aada324f24a1710  # tags/dbus-1.10.24^0
 source=("git+https://anongit.freedesktop.org/git/dbus/dbus.git#commit=$_commit"
         'dbus.sysusers'
         'dbus.tmpfiles')
