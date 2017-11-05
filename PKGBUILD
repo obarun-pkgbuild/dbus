@@ -8,7 +8,7 @@
 
 pkgbase=dbus
 pkgname=('dbus' 'dbus-docs')
-pkgver=1.10.24
+pkgver=1.12.0
 pkgrel=2
 pkgdesc="Freedesktop.org message bus system"
 url="https://wiki.freedesktop.org/Software/dbus"
@@ -22,13 +22,13 @@ makedepends=('xmlto' 'docbook-xsl' 'python' 'yelp-tools' 'doxygen' 'git'
 			'libxcursor' 'libxdamage' 'libfontenc' 'libxfont' 'libxfont2'
 			'libxft' 'libxi' 'libxinerama' 'libxrandr' 'libxres' 'libxtst'
 			'libxv' 'libxvmc' 'libxxf86dga' 'libxxf86vm' 'libdmx' 'libpciaccess'
-			'libxkbfile' 'libxshmfence' 'autoconf-archive')
-_commit=430643da9da488a0b089868b9aada324f24a1710  # tags/dbus-1.10.24^0
+			'libxkbfile' 'libxshmfence' 'autoconf-archive' 'graphviz')
+_commit=98294ab81a4d7ef00b6de5149344d92278c38593 # tags/dbus-1.12.0^0
 source=("git+https://anongit.freedesktop.org/git/dbus/dbus.git#commit=$_commit"
         'dbus.sysusers'
         'dbus.tmpfiles')
 sha256sums=('SKIP'
-            '1ce179ba3a92ad34941d8ac7f53d01d42cbc91d43ada1136492b78c10b5d693d'
+            '9bc34a20595df8869d43a8d9af74cbded999c9a004ec12ff8ce07d58d81018d8'
             '965cef20cce35819e89c65f06a931a38bea2119b0ae9c259b5d7f9cfc3edd6d7')
 validpgpkeys=('6DD4217456569BA711566AC7F06E8FDE7B45DAAC') # Eric Vidal
 
@@ -39,7 +39,11 @@ pkgver() {
 
 prepare() {
   cd $pkgbase
-  git cherry-pick -n 09cb6d7b467f6d1c6685ee9ccc171f4dddbe1f42
+
+  # Reduce docs size
+  printf '%s\n' >>Doxyfile.in \
+  HAVE_DOT=yes DOT_IMAGE_FORMAT=svg INTERACTIVE_SVG=yes
+
   NOCONFIGURE=1 ./autogen.sh
 }
 
