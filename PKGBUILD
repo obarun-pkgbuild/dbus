@@ -8,7 +8,7 @@
 
 pkgbase=dbus
 pkgname=('dbus' 'dbus-docs')
-pkgver=1.12.0
+pkgver=1.12.2
 pkgrel=2
 pkgdesc="Freedesktop.org message bus system"
 url="https://wiki.freedesktop.org/Software/dbus"
@@ -19,11 +19,11 @@ conflicts=('dbus-eudev')
 makedepends=('xmlto' 'docbook-xsl' 'python' 'yelp-tools' 'doxygen' 'git'
 			'xtrans' 'libx11' 'libxext' 'libfs' 'libice' 'libsm' 'libxt'
 			'libxmu' 'libxpm' 'libxaw' 'libxfixes' 'libxcomposite' 'libxrender'
-			'libxcursor' 'libxdamage' 'libfontenc' 'libxfont' 'libxfont2'
+			'libxcursor' 'libxdamage' 'libfontenc' 'libxfont2'
 			'libxft' 'libxi' 'libxinerama' 'libxrandr' 'libxres' 'libxtst'
 			'libxv' 'libxvmc' 'libxxf86dga' 'libxxf86vm' 'libdmx' 'libpciaccess'
 			'libxkbfile' 'libxshmfence' 'autoconf-archive' 'graphviz')
-_commit=98294ab81a4d7ef00b6de5149344d92278c38593 # tags/dbus-1.12.0^0
+_commit=0f0968336b9711349023e1d41f075b2bccf7c20b # tags/dbus-1.12.2^0
 source=("git+https://anongit.freedesktop.org/git/dbus/dbus.git#commit=$_commit"
         'dbus.sysusers'
         'dbus.tmpfiles')
